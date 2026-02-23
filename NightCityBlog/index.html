@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NightCity Blog — Cyberpunk Gaming Community</title>
+  <meta name="description"
+    content="NightCity Blog — Nơi tụi mình tụ lại tám về Cyberpunk 2077, Witcher 3, Elden Ring, RDR2 và mấy game đỉnh khác.">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="ldt">NIGHT<b>CITY</b></div>
+    <div class="ldb">
+      <div class="ldf" id="ldF"></div>
+    </div>
+  </div>
+
+  <!-- SCROLL PROGRESS & BACKGROUND -->
+  <div id="sP"></div>
+  <canvas id="ptc"></canvas>
+  <div class="bgG" style="width:500px;height:500px;background:var(--c);top:10%;left:-10%"></div>
+  <div class="bgG" style="width:400px;height:400px;background:var(--m);bottom:5%;right:-8%"></div>
+  <div class="bgG" style="width:300px;height:300px;background:var(--y);top:50%;right:20%"></div>
+
+  <!-- SIDEBAR -->
+  <div class="sO" id="sO" onclick="tSB()"></div>
+  <div class="sb" id="sb">
+    <div class="sT">
+      <span class="sTt">MENU</span>
+      <button class="sX" onclick="tSB()">✕</button>
+    </div>
+    <div class="sL">
+      <a class="sl" onclick="go('home')"><span class="sI">🏠</span>Trang chủ</a>
+      <a class="sl" onclick="go('dash')"><span class="sI">📊</span>Dashboard</a>
+      <div class="sD"></div>
+      <a class="sl" onclick="go('contact')"><span class="sI">📨</span>Liên hệ</a>
+    </div>
+    <div class="sF">NIGHTCITY BLOG 2025</div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <button class="ham" onclick="tSB()">☰</button>
+    <a class="logo" onclick="go('home')">NIGHT<b>CITY</b></a>
+    <div class="nsp"></div>
+    <div class="nr" id="nR"></div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hS" id="hS"></div>
+    <h1 class="hT" id="hT">
+      <span class="tc">NIGHT</span><span class="ty">CITY</span>
+    </h1>
+    <p class="hSu">Nơi tụi mình tụ lại tám về <em>Cyberpunk</em>, Witcher, Elden Ring, RDR2, Stardew Valley và mấy game
+      đỉnh khác.</p>
+    <svg id="hSvg"></svg>
+  </section>
+
+  <!-- BLOG GRID -->
+  <section class="blog" id="hV">
+    <div class="bH fu">
+      <h2 class="bT">BẢNG TIN</h2>
+      <button class="wB" onclick="oW()">+ Viết bài</button>
+    </div>
+    <div class="searchBar">
+      <span class="searchIcon">🔍</span>
+      <input type="text" class="searchInput" id="searchInput" placeholder="Tìm kiếm game, bài viết, tác giả..."
+        oninput="doSearch()" autocomplete="off">
+      <button class="searchClear" id="searchClear" onclick="clearSearch()">✕</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <!-- POST DETAIL -->
+  <section id="dV"></section>
+
+  <!-- AUTHOR PROFILE PAGE -->
+  <section id="proV"></section>
+
+  <!-- DASHBOARD -->
+  <section id="daV"></section>
+
+  <!-- MY POSTS -->
+  <section id="myV">
+    <button class="bk" onclick="go('home')">← Quay lại</button>
+    <h2 class="bT" style="margin-bottom:18px">BÀI VIẾT CỦA TUI</h2>
+    <div class="grid" id="myG"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="coV">
+    <button class="bk" onclick="go('home')">← Quay lại</button>
+    <div class="coC">
+      <h2>LIÊN HỆ</h2>
+      <p>NightCity Blog — có gì muốn nói thì liên hệ qua mấy kênh dưới đây nha.</p>
+      <div class="ci"><span>🐙</span><a href="https://github.com/Ocean-ng" target="_blank">github.com/Ocean-ng</a></div>
+      <div class="ci"><span>💬</span>Discord: NightCityBlog#2077</div>
+      <div class="ci"><span>📧</span>nightcity.blog@gmail.com</div>
+      <p style="margin-top:14px;font-size:.8rem">Muốn góp ý hay hợp tác thì nhắn thoải mái! 🎮</p>
+    </div>
+  </section>
+
+  <!-- LOGIN MODAL -->
+  <div class="ov" id="liO">
+    <div class="mod" id="liB">
+      <button class="mX" onclick="cM('li')">✕</button>
+      <h2>ĐĂNG NHẬP</h2>
+      <p>Chào mừng trở lại, Samurai.</p>
+      <div class="mE" id="liE"></div>
+      <input class="mi" id="liU" placeholder="Tên người dùng" autocomplete="off">
+      <input class="mi" id="liP" type="password" placeholder="Mật khẩu">
+      <button class="ms" onclick="doLi()">JACK IN</button>
+      <div class="mSw">Chưa có tài khoản? <a onclick="sM('li','re')">Đăng ký</a></div>
+    </div>
+  </div>
+
+  <!-- REGISTER MODAL -->
+  <div class="ov" id="reO">
+    <div class="mod" id="reB">
+      <button class="mX" onclick="cM('re')">✕</button>
+      <h2>ĐĂNG KÝ</h2>
+      <p>Tạo tài khoản mới.</p>
+      <div class="mE" id="reE"></div>
+      <input class="mi" id="reU" placeholder="Tên người dùng" autocomplete="off">
+      <input class="mi" id="reD" placeholder="Tên hiển thị" autocomplete="off">
+      <input class="mi" id="reP" type="password" placeholder="Mật khẩu (4+ ký tự)">
+      <button class="ms" onclick="doRe()">TẠO TÀI KHOẢN</button>
+      <div class="mSw">Đã có tài khoản? <a onclick="sM('re','li')">Đăng nhập</a></div>
+    </div>
+  </div>
+
+  <!-- WRITE POST MODAL -->
+  <div class="ov" id="wrO">
+    <div class="mod" id="wrB" style="max-width:520px">
+      <button class="mX" onclick="cM('wr')">✕</button>
+      <h2>BÀI VIẾT MỚI</h2>
+      <p>Chia sẻ suy nghĩ của bạn.</p>
+      <input class="mi" id="wpT" placeholder="Tiêu đề...">
+      <select class="mi miS" id="wpG"></select>
+      <div class="imS">
+        <label>🖼 Thêm ảnh (tùy)</label>
+        <div class="imTb">
+          <div class="imT on" id="tU" onclick="iT('u')">Link ảnh</div>
+          <div class="imT" id="tF" onclick="iT('f')">Upload</div>
+        </div>
+        <div class="imU on" id="iUB">
+          <input class="mi" id="wpI" placeholder="https://..." style="margin-bottom:0">
+        </div>
+        <div class="imF" id="iFB">
+          <div class="fD" id="fD">📁 Chọn ảnh hoặc kéo thả<input type="file" id="fI" accept="image/*"></div>
+        </div>
+        <div class="imP" id="imP"><img id="pI"><button class="imR" onclick="clI()">✕</button></div>
+      </div>
+      <textarea class="mi miT" id="wpB" placeholder="Viết gì đó đi..."></textarea>
+      <button class="ms" onclick="doP()">ĐĂNG BÀI</button>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lb" id="lb" onclick="cLB()"><img id="lbI"></div>
+
+  <!-- TOAST -->
+  <div class="toast" id="tst"></div>
+
+  <!-- FOOTER -->
+  <div class="footer"><b>NIGHTCITY BLOG</b> — 2025 — Wake up, Samurai.</div>
+
+  <!-- SCRIPTS -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+
+</body>
+
+</html>
